@@ -9,3 +9,9 @@
 
 rootProject.name = 'source-resolution-demo'
 include('lib')
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
