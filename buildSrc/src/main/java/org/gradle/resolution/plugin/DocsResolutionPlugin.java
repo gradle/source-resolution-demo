@@ -53,6 +53,10 @@ public final class DocsResolutionPlugin implements Plugin<Project> {
     private ArtifactView buildDocumentationView(Project project, String docsType) {
         return project.getConfigurations().getByName("runtimeClasspath").getIncoming().artifactView(view -> {
             view.setLenient(true);
+
+            // Uncomment me to view the new behavior
+            // view.withVariantReselection();
+
             AttributeContainer attributes = view.getAttributes();
             attributes.attribute(Category.CATEGORY_ATTRIBUTE, project.getObjects().named(Category.class, Category.DOCUMENTATION));
             attributes.attribute(Bundling.BUNDLING_ATTRIBUTE, project.getObjects().named(Bundling.class, Bundling.EXTERNAL));

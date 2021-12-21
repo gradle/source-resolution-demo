@@ -15,7 +15,9 @@ dependencies {
 
     // OKHttp has sources and javadoc available, and has variants described in the metadata
     // https://repo1.maven.org/maven2/com/squareup/okhttp3/okhttp/4.9.3/
-    api 'com.squareup.okhttp3:okhttp:4.9.3'
+    api('com.squareup.okhttp3:okhttp:4.9.3') {
+        exclude group: 'com.squareup.okio', module: 'okio' because 'If included, this transitive dep has a variant which obscures the results'
+    }
 
     // This dependency is published to the local Maven repository, and lacks sources
     api 'org.gradle.resolution:util:1.0'
