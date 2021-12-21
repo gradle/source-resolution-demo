@@ -1,0 +1,27 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+// Uncomment these to publish Javadoc or Sources jars and include their information in the Gradle Module Metadata when publishing
+java {
+    // withJavadocJar()
+    // withSourcesJar()
+}
+
+dependencies {
+    // This is a transitive dependency of the lib project which lives in Maven Central and contains a Sources variant
+    api 'com.github.britter:bean-validators:0.7.0'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.gradle.resolution'
+            artifactId = 'util'
+            version = '1.0'
+
+            from components.java
+        }
+    }
+}

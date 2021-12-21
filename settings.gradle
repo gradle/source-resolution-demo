@@ -8,10 +8,13 @@
  */
 
 rootProject.name = 'source-resolution-demo'
+
 include('lib')
+include('util')
 
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
+        mavenLocal()
     }
 }
