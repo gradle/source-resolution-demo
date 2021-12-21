@@ -5,7 +5,7 @@ plugins {
 
 // Uncomment these to publish Javadoc or Sources jars and include their information in the Gradle Module Metadata when publishing
 java {
-    // withJavadocJar()
+    withJavadocJar()
     // withSourcesJar()
 }
 

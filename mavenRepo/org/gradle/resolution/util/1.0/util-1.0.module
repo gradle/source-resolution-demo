@@ -73,6 +73,26 @@
           "md5": "1c8fcf6e6230d72fad3e38d303a3532b"
         }
       ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "util-1.0-javadoc.jar",
+          "url": "util-1.0-javadoc.jar",
+          "size": 393860,
+          "sha512": "77384ac63127ba6519bf3f19f9cb1cd21687a37205401112a4f87769e9dc9fd873f9525cbbae68bb6ccfcb8ff90053d20e27fa5a33460e464c4bbd9355fc1230",
+          "sha256": "4a267b4acc55695f860edf18795f5ed1b90f2c3d1f2830a640476760a35cf0ec",
+          "sha1": "2ef1f48a638b80d841557c0cbeb9ce8c6406df7c",
+          "md5": "8162a9b47288ddd1003580bed89ceb97"
+        }
+      ]
     }
   ]
 }

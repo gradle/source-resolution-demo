@@ -1,8 +1,10 @@
+import org.gradle.resolution.plugin.DocsResolutionPlugin
+
 plugins {
     id 'java-library'
 }
 
-apply plugin: org.gradle.resolution.plugin.SourceResolutionPlugin
+apply plugin: DocsResolutionPlugin
 
 dependencies {
     // These dependencies arepublished on Maven Central
