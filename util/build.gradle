@@ -16,12 +16,18 @@ dependencies {
 
 publishing {
     publications {
-        maven(MavenPublication) {
+        util(MavenPublication) {
             groupId = 'org.gradle.resolution'
             artifactId = 'util'
             version = '1.0'
 
             from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = 'demo'
+            url(rootProject.layout.projectDirectory.file('mavenRepo'))
         }
     }
 }

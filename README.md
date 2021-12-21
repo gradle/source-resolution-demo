@@ -4,12 +4,11 @@ This project demonstrates how to use an [ArtifactView](https://docs.gradle.org/c
 
 ## Running the Demo
 
-1) Run `./gradlew :util:publishToMavenLocal` to publish the `util` project to the local Maven repository with Gradle Module Metadata.
-2) Run `./gradlew :lib:resolveDocumentation` to resolve documentation of all the runtime dependencies of the `lib` project.  These will be printed to the console, downloaded and copied into the `lib/build/sources` directory.
+Run `./gradlew :lib:resolveDocumentation` to resolve documentation of all the runtime dependencies of the `lib` project.  These will be printed to the console, downloaded and copied into the `lib/build/sources` directory.
 
 ## Project Structure
 
-There are two projects in this demo: `lib` and `util`.  Lib is a `java-library` project which includes several `api` dependencies upon projects located in Maven Central, and also includes a dependency upon the published `util` project via the local Maven repository.
+There are two projects in this demo: `lib` and `util`.  Lib is a `java-library` project which includes several `api` dependencies upon projects located in Maven Central, and also includes a dependency upon the published `util` project via a local Maven repository in `/mavenRepo'.  The published library has been committed to the project, so you do not have to publish it prior to resolving documentation.
 
 The `util` project does **not** publish any Source variant information in its Metadata.  It ** does** depend upon Bean Validators, which has a Source variant available.  This demonstrates that this situation does **not** impact resolution of other source dependencies.
 

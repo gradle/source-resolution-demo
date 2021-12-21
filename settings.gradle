@@ -15,6 +15,10 @@ include('util')
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        mavenLocal()
+
+        maven {
+            name = 'demo'
+            url(new File(settingsDir, 'mavenRepo').toURI().toURL())
+        }
     }
 }
