@@ -12,6 +12,7 @@ public class SourceResolutionPlugin implements Plugin<Project> {
 
             // Set task input and output conventions
             task.getInputs().files(project.getConfigurations().getByName("runtimeClasspath"));
+            task.getConfigurationToResolve().convention(project.getConfigurations().getByName("runtimeClasspath"));
             task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("sources"));
 
             // Always rerun this task

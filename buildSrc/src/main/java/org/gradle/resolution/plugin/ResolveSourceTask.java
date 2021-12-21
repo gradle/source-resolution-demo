@@ -1,8 +1,11 @@
 package org.gradle.resolution.plugin;
 
+import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.attributes.Category;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.FileSystemOperations;
+import org.gradle.api.provider.Property;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.artifacts.ArtifactView;
@@ -19,16 +22,17 @@ public abstract class ResolveSourceTask extends org.gradle.api.DefaultTask {
     @Inject
     protected abstract FileSystemOperations getFileSystemOperations();
 
-
-
-    // Set up an ArtifactView based on the runtime classpath which will fetch documentation
-    private ArtifactView sourcesView = getProject().getConfigurations().getByName("runtimeClasspath").getIncoming().artifactView(view -> {
-        view.setLenient(true);
-        view.getAttributes().attribute(Category.CATEGORY_ATTRIBUTE, getProject().getObjects().named(Category.class, Category.DOCUMENTATION));
-    });
+    @Input
+    public abstract Property<Configuration> getConfigurationToResolve();
 
     @TaskAction
     public void printSources() {
+        // Set up an ArtifactView based on the runtime classpath which will fetch documentation
+        ArtifactView sourcesView = getConfigurationToResolve().get().getIncoming().artifactView(view -> {
+            view.setLenient(true);
+            view.getAttributes().attribute(Category.CATEGORY_ATTRIBUTE, getProject().getObjects().named(Category.class, Category.DOCUMENTATION));
+        });
+
         // Fetch the source files from the ArtifactView
         Set<File> sourceFiles = sourcesView.getFiles().getFiles();
 
