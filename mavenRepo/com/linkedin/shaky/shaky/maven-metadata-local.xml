@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.linkedin.shaky</groupId>
+  <artifactId>shaky</artifactId>
+  <versioning>
+    <latest>3.0.3-SNAPSHOT</latest>
+    <versions>
+      <version>3.0.3-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20211221235737</lastUpdated>
+  </versioning>
+</metadata>

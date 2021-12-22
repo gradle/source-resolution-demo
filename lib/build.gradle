@@ -21,4 +21,6 @@ dependencies {
 
     // This dependency is published to the local Maven repository, and lacks sources
     api 'org.gradle.resolution:util:1.0'
+
+    runtimeClasspathLikeAndroid "com.linkedin.shaky:shaky:3.0.3-SNAPSHOT"
 }

@@ -1,0 +1,306 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.linkedin.shaky",
+    "module": "shaky",
+    "version": "3.0.3-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2-rc-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "debugVariantDefaultApiPublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.squareup",
+          "module": "seismic",
+          "version": {
+            "requires": "1.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-debug.aar",
+          "url": "shaky-3.0.3-SNAPSHOT-debug.aar",
+          "size": 181705,
+          "sha512": "5d5a317858a88c5baba3b8067d66f1f3b28c9eabf8716bfbd5b6c7f801535fb0ac24d66673982575e998b4b30e2d9d119bdd3513fb4d5f9e8a72476d83b6c8ec",
+          "sha256": "06255d72f760e3c1db9ef886018f2d9248d385dad2800172ce78263a0c703383",
+          "sha1": "3412bff2b2280132ec82e263fc0cf4ac46580a87",
+          "md5": "c499f4ffa212f5442a5d3b11e9a19475"
+        }
+      ]
+    },
+    {
+      "name": "debugVariantDefaultRuntimePublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.jraska",
+          "module": "falcon",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.legacy",
+          "module": "legacy-support-v4",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "seismic",
+          "version": {
+            "requires": "1.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-debug.aar",
+          "url": "shaky-3.0.3-SNAPSHOT-debug.aar",
+          "size": 181705,
+          "sha512": "5d5a317858a88c5baba3b8067d66f1f3b28c9eabf8716bfbd5b6c7f801535fb0ac24d66673982575e998b4b30e2d9d119bdd3513fb4d5f9e8a72476d83b6c8ec",
+          "sha256": "06255d72f760e3c1db9ef886018f2d9248d385dad2800172ce78263a0c703383",
+          "sha1": "3412bff2b2280132ec82e263fc0cf4ac46580a87",
+          "md5": "c499f4ffa212f5442a5d3b11e9a19475"
+        }
+      ]
+    },
+    {
+      "name": "debugVariantDefaultSourcePublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-debug-sources.jar",
+          "url": "shaky-3.0.3-SNAPSHOT-debug-sources.jar",
+          "size": 33550,
+          "sha512": "f24a7a38b85f215ba9f805ce239e51e42332109c2b2a0f08cfbdf7c77d6803ed25be3649d1229ae380865d3779c916e1c74424091a323e1305724632a1fb4249",
+          "sha256": "7c8c21fe3aed89f7e6d59cc3bc7dd20a8c9c6fbbfb42c8ae75e21eca6cdbe2e9",
+          "sha1": "03cae1113f4042cd89572b20c290c710c2ac1bed",
+          "md5": "4e112240b6ee82d78edc211d6b19e5c3"
+        }
+      ]
+    },
+    {
+      "name": "debugVariantDefaultJavaDocPublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-debug-javadoc.jar",
+          "url": "shaky-3.0.3-SNAPSHOT-debug-javadoc.jar",
+          "size": 391704,
+          "sha512": "adff4d5e40a3fc0af7e7a1d1f5991a976db12e7a4850f48e40cbc85ca5b8b586276ce17abdb7ed1d7416876036f1c17f23250a610e0e3944972309e6f62a9052",
+          "sha256": "bbc55baa0ca4325d8d8fd2102634bfd6482d29255663f960eb2a3fd4fbe8ddbc",
+          "sha1": "c60dc02bfc5d4d54d314d74c525ea5dce75922ff",
+          "md5": "fc0ef37cb9290241530e8539e7fe274f"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantDefaultApiPublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "release",
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.squareup",
+          "module": "seismic",
+          "version": {
+            "requires": "1.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-release.aar",
+          "url": "shaky-3.0.3-SNAPSHOT-release.aar",
+          "size": 178955,
+          "sha512": "dcf6d1f16bf769e7fe8d5a9c72e670f42081ce4dfd55382b21ffe96e834b9068aa41257638b692b42957caece9dcb2f3352697b0df2cd8b851f92221aabf0fb2",
+          "sha256": "3f7f00e09c79ddb1f3cd3963910be8c1d7143542d3a6c8e4fc52928f31992f30",
+          "sha1": "68617a80016b8825993255a0dbcf323496f2b8da",
+          "md5": "9c2ad9bc882b1e576299f37e5bedc113"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantDefaultRuntimePublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "release",
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.jraska",
+          "module": "falcon",
+          "version": {
+            "requires": "2.1.1"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.legacy",
+          "module": "legacy-support-v4",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "seismic",
+          "version": {
+            "requires": "1.0.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-release.aar",
+          "url": "shaky-3.0.3-SNAPSHOT-release.aar",
+          "size": 178955,
+          "sha512": "dcf6d1f16bf769e7fe8d5a9c72e670f42081ce4dfd55382b21ffe96e834b9068aa41257638b692b42957caece9dcb2f3352697b0df2cd8b851f92221aabf0fb2",
+          "sha256": "3f7f00e09c79ddb1f3cd3963910be8c1d7143542d3a6c8e4fc52928f31992f30",
+          "sha1": "68617a80016b8825993255a0dbcf323496f2b8da",
+          "md5": "9c2ad9bc882b1e576299f37e5bedc113"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantDefaultSourcePublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "release",
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-release-sources.jar",
+          "url": "shaky-3.0.3-SNAPSHOT-release-sources.jar",
+          "size": 33537,
+          "sha512": "063fd17dc398cd6420dcada1c1672d6a6a2c867a47518505336a240af510db9bd4215a6188173e1ff216024117afce686e0db2b44bd1c257259e16a2505f743b",
+          "sha256": "3f26cbd3b0c9a35b8bb34615fe6261666e15013e57bec83a18707804f7256ced",
+          "sha1": "1f28dde586d931bad3e3b767599c61b562dab130",
+          "md5": "0668919c5e1c9cb247445e71fe4b6059"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantDefaultJavaDocPublication",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "release",
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "shaky-3.0.3-SNAPSHOT-release-javadoc.jar",
+          "url": "shaky-3.0.3-SNAPSHOT-release-javadoc.jar",
+          "size": 391704,
+          "sha512": "adff4d5e40a3fc0af7e7a1d1f5991a976db12e7a4850f48e40cbc85ca5b8b586276ce17abdb7ed1d7416876036f1c17f23250a610e0e3944972309e6f62a9052",
+          "sha256": "bbc55baa0ca4325d8d8fd2102634bfd6482d29255663f960eb2a3fd4fbe8ddbc",
+          "sha1": "c60dc02bfc5d4d54d314d74c525ea5dce75922ff",
+          "md5": "fc0ef37cb9290241530e8539e7fe274f"
+        }
+      ]
+    }
+  ]
+}

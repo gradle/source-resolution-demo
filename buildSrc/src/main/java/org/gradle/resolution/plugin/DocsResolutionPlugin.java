@@ -4,17 +4,26 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.artifacts.ArtifactView;
+import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.attributes.*;
+import org.gradle.api.model.ObjectFactory;
 
-public final class DocsResolutionPlugin implements Plugin<Project> {
+import javax.inject.Inject;
+
+public abstract class DocsResolutionPlugin implements Plugin<Project> {
+
+    @Inject
+    protected abstract ObjectFactory getObjectFactory();
+
     @Override
     public void apply(Project project) {
+        Configuration runtimeClasspath = project.getConfigurations().getByName("runtimeClasspath");
         project.getTasks().register("resolveSource", ResolveDocsTask.class, task -> {
             task.setGroup("documentation");
             task.setDescription("Resolve source artifacts for all runtime dependencies");
 
             // Set task input and output conventions
-            ArtifactView docsView = buildDocumentationView(project, DocsType.SOURCES);
+            ArtifactView docsView = buildDocumentationView(runtimeClasspath, DocsType.SOURCES);
             task.getDocs().from(docsView.getFiles());
             task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("sources"));
 
@@ -27,7 +36,7 @@ public final class DocsResolutionPlugin implements Plugin<Project> {
             task.setDescription("Resolve javadoc artifacts for all runtime dependencies");
 
             // Set task input and output conventions
-            ArtifactView docsView = buildDocumentationView(project, DocsType.JAVADOC);
+            ArtifactView docsView = buildDocumentationView(runtimeClasspath, DocsType.JAVADOC);
             task.getDocs().from(docsView.getFiles());
             task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("javadoc"));
 
@@ -41,27 +50,89 @@ public final class DocsResolutionPlugin implements Plugin<Project> {
 
             task.dependsOn("resolveSource", "resolveJavadoc");
         });
+
+        Configuration runtimeClasspathAndroid = project.getConfigurations().create("runtimeClasspathLikeAndroid", configuration -> {
+            configuration.setCanBeResolved(true);
+            configuration.setCanBeConsumed(false);
+
+            configuration.attributes(attributes -> {
+                attributes.attribute(Usage.USAGE_ATTRIBUTE, getObjectFactory().named(Usage.class, Usage.JAVA_RUNTIME));
+                attributes.attribute(Category.CATEGORY_ATTRIBUTE, getObjectFactory().named(Category.class, Category.LIBRARY));
+                attributes.attribute(Bundling.BUNDLING_ATTRIBUTE, getObjectFactory().named(Bundling.class, Bundling.EXTERNAL));
+                attributes.attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, getObjectFactory().named(LibraryElements.class, "aar"));
+                attributes.attribute(Attribute.of("com.android.build.api.attributes.BuildTypeAttr", String.class), "release");
+            });
+        });
+
+        project.getTasks().register("resolveAndroidSource", ResolveDocsTask.class, task -> {
+            task.setGroup("documentation");
+            task.setDescription("Resolve source artifacts for all Android's runtime dependencies");
+
+            // Set task input and output conventions
+            ArtifactView docsView = buildAndroidDocumentationView(runtimeClasspathAndroid, DocsType.SOURCES);
+            task.getDocs().from(docsView.getFiles());
+            task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("sources"));
+
+            // Always rerun this task
+            task.getOutputs().upToDateWhen(e -> false);
+        });
+
+        project.getTasks().register("resolveAndroidJavadoc", ResolveDocsTask.class, task -> {
+            task.setGroup("documentation");
+            task.setDescription("Resolve javadoc artifacts for all Android's runtime dependencies");
+
+            // Set task input and output conventions
+            ArtifactView docsView = buildAndroidDocumentationView(runtimeClasspathAndroid, DocsType.JAVADOC);
+            task.getDocs().from(docsView.getFiles());
+            task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("javadoc"));
+
+            // Always rerun this task
+            task.getOutputs().upToDateWhen(e -> false);
+        });
+
+        project.getTasks().register("resolveAndroidDocumentation", Task.class, task -> {
+            task.setGroup("documentation");
+            task.setDescription("Resolve and download all documentation of Android's runtime dependencies");
+
+            task.dependsOn("resolveAndroidSource", "resolveAndroidJavadoc");
+        });
     }
 
     /**
      * Sets up an ArtifactView based on this project's runtime classpath which will fetch documentation.
      *
-     * @param project the project to investigate
+     * @param graph the resolution graph to retrieve artifacts from
      * @param docsType the type of documentation artifact the returned view will fetch
      * @return ArtifactView which will fetch documentation
      */
-    private ArtifactView buildDocumentationView(Project project, String docsType) {
-        return project.getConfigurations().getByName("runtimeClasspath").getIncoming().artifactView(view -> {
+    private ArtifactView buildDocumentationView(Configuration graph, String docsType) {
+        return graph.getIncoming().artifactView(view -> {
             view.setLenient(true);
 
             // Uncomment me to view the new behavior
             // view.withVariantReselection();
 
             AttributeContainer attributes = view.getAttributes();
-            attributes.attribute(Category.CATEGORY_ATTRIBUTE, project.getObjects().named(Category.class, Category.DOCUMENTATION));
-            attributes.attribute(Bundling.BUNDLING_ATTRIBUTE, project.getObjects().named(Bundling.class, Bundling.EXTERNAL));
-            attributes.attribute(DocsType.DOCS_TYPE_ATTRIBUTE, project.getObjects().named(DocsType.class, docsType));
-            attributes.attribute(Usage.USAGE_ATTRIBUTE, project.getObjects().named(Usage.class, Usage.JAVA_RUNTIME));
+            attributes.attribute(Category.CATEGORY_ATTRIBUTE, getObjectFactory().named(Category.class, Category.DOCUMENTATION));
+            attributes.attribute(Bundling.BUNDLING_ATTRIBUTE, getObjectFactory().named(Bundling.class, Bundling.EXTERNAL));
+            attributes.attribute(DocsType.DOCS_TYPE_ATTRIBUTE, getObjectFactory().named(DocsType.class, docsType));
+            attributes.attribute(Usage.USAGE_ATTRIBUTE, getObjectFactory().named(Usage.class, Usage.JAVA_RUNTIME));
+        });
+    }
+
+    private ArtifactView buildAndroidDocumentationView(Configuration graph, String docsType) {
+        return graph.getIncoming().artifactView(view -> {
+            view.setLenient(true);
+
+            // Uncomment me to view the new behavior
+            // view.withVariantReselection();
+
+            AttributeContainer attributes = view.getAttributes();
+            attributes.attribute(Attribute.of("com.android.build.api.attributes.BuildTypeAttr", String.class), "release");
+            attributes.attribute(Category.CATEGORY_ATTRIBUTE, getObjectFactory().named(Category.class, Category.DOCUMENTATION));
+            attributes.attribute(Bundling.BUNDLING_ATTRIBUTE, getObjectFactory().named(Bundling.class, Bundling.EXTERNAL));
+            attributes.attribute(DocsType.DOCS_TYPE_ATTRIBUTE, getObjectFactory().named(DocsType.class, docsType));
+            attributes.attribute(Usage.USAGE_ATTRIBUTE, getObjectFactory().named(Usage.class, Usage.JAVA_RUNTIME));
         });
     }
 }

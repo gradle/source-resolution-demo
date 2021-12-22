@@ -2,7 +2,7 @@
 
 This project demonstrates how to use an [ArtifactView](https://docs.gradle.org/current/javadoc/org/gradle/api/artifacts/ArtifactView.html) to obtain source and Javadoc jars for a project's runtime dependencies and download them in parallel.
 
-## Running the Demo
+## Running the Java example
 
 1) Run `./gradlew :lib:resolveDocumentation` to attempt to resolve Source and Javadoc artifacts of all the runtime dependencies of the `lib` project.  These will be printed to the console, downloaded and copied into the `lib/build/sources` directory. 
 
@@ -18,7 +18,7 @@ Resolved the following files: []
 BUILD SUCCESSFUL in 978ms
 ```
 
-3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 58:
+3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 113:
 
 ```
 // view.withVariantReselection();
@@ -38,6 +38,40 @@ BUILD SUCCESSFUL in 786ms
 
 5) You should now be able to locate the Source and Javadoc artifacts in the `/lib/build/sources` and `lib/build/javadoc` directories, respectively.
 
+## Running the Android example
+
+1) Run `./gradlew :lib:resolveAndroidDocumentation` to attempt to resolve Source and Javadoc artifacts of all the runtime dependencies of the `lib` project as if it were an Android project.  These will be printed to the console, downloaded and copied into the `lib/build/sources` directory. 
+
+2) Running this task initially results in no output or files downloaded.  This demonstrates the current behavior.  You should see output like this:
+
+```
+> Task :lib:resolveAndroidJavadoc
+Resolved the following files: []
+
+> Task :lib:resolveAndroidSource
+Resolved the following files: []
+
+BUILD SUCCESSFUL in 978ms
+```
+
+3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 128:
+
+```
+// view.withVariantReselection();
+```
+
+4) Now rerun `./gradlew :lib:resolveAndroidDocumentation`.  This demonstrates the new behavior.  You should see output like this:
+
+```
+> Task :lib:resolveAndroidJavadoc
+Resolved the following files: [shaky-3.0.3-SNAPSHOT-release-javadoc.jar]
+
+> Task :lib:resolveAndroidSource
+Resolved the following files: [shaky-3.0.3-SNAPSHOT-release-sources.jar]
+
+BUILD SUCCESSFUL in 786ms
+```
+
 ## Project Structure
 
 There are two projects in this demo: `lib` and `util`.  Lib is the example project for which we're interested in resolving documentation artifacts.  It is a `java-library` project which includes several `api` dependencies upon open source projects.
@@ -54,6 +88,8 @@ java {
 }
 ```
 and then run `./gradlew :util:publishUtilPublicationToDemoRepository` to republish this project.
+
+The Android project is based on this [Android Issue](https://issuetracker.google.com/issues/197636221) and published in `/mavenRepo`.
 
 ### The `ResolveDocsTask` Task
 
