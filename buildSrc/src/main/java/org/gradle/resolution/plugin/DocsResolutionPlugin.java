@@ -51,16 +51,24 @@ public abstract class DocsResolutionPlugin implements Plugin<Project> {
             task.dependsOn("resolveSource", "resolveJavadoc");
         });
 
-        Configuration runtimeClasspathAndroid = project.getConfigurations().create("runtimeClasspathLikeAndroid", configuration -> {
+        Configuration releaseRuntimeClasspath = project.getConfigurations().create("releaseRuntimeClasspath", configuration -> {
             configuration.setCanBeResolved(true);
             configuration.setCanBeConsumed(false);
+/*
+--------------------------------------------------
+Configuration releaseRuntimeClasspath
+--------------------------------------------------
+Runtime classpath of compilation 'release' (target  (androidJvm)).
 
+Attributes
+    - com.android.build.api.attributes.BuildTypeAttr = release
+    - org.gradle.usage                               = java-runtime
+    - org.jetbrains.kotlin.platform.type             = androidJvm
+*/
             configuration.attributes(attributes -> {
-                attributes.attribute(Usage.USAGE_ATTRIBUTE, getObjectFactory().named(Usage.class, Usage.JAVA_RUNTIME));
-                attributes.attribute(Category.CATEGORY_ATTRIBUTE, getObjectFactory().named(Category.class, Category.LIBRARY));
-                attributes.attribute(Bundling.BUNDLING_ATTRIBUTE, getObjectFactory().named(Bundling.class, Bundling.EXTERNAL));
-                attributes.attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, getObjectFactory().named(LibraryElements.class, "aar"));
                 attributes.attribute(Attribute.of("com.android.build.api.attributes.BuildTypeAttr", String.class), "release");
+                attributes.attribute(Attribute.of("org.jetbrains.kotlin.platform.type", String.class), "androidJvm");
+                attributes.attribute(Usage.USAGE_ATTRIBUTE, getObjectFactory().named(Usage.class, Usage.JAVA_RUNTIME));
             });
         });
 
@@ -69,7 +77,7 @@ public abstract class DocsResolutionPlugin implements Plugin<Project> {
             task.setDescription("Resolve source artifacts for all Android's runtime dependencies");
 
             // Set task input and output conventions
-            ArtifactView docsView = buildAndroidDocumentationView(runtimeClasspathAndroid, DocsType.SOURCES);
+            ArtifactView docsView = buildAndroidDocumentationView(releaseRuntimeClasspath, DocsType.SOURCES);
             task.getDocs().from(docsView.getFiles());
             task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("sources"));
 
@@ -82,7 +90,7 @@ public abstract class DocsResolutionPlugin implements Plugin<Project> {
             task.setDescription("Resolve javadoc artifacts for all Android's runtime dependencies");
 
             // Set task input and output conventions
-            ArtifactView docsView = buildAndroidDocumentationView(runtimeClasspathAndroid, DocsType.JAVADOC);
+            ArtifactView docsView = buildAndroidDocumentationView(releaseRuntimeClasspath, DocsType.JAVADOC);
             task.getDocs().from(docsView.getFiles());
             task.getDestinationDir().convention(project.getLayout().getBuildDirectory().dir("javadoc"));
 
