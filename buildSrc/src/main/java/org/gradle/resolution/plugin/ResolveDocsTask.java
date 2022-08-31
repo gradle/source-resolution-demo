@@ -28,7 +28,7 @@ public abstract class ResolveDocsTask extends org.gradle.api.DefaultTask {
         Set<File> sourceFiles = getDocs().getFiles();
 
         // Copy them to the output folder
-        getFileSystemOperations().copy(spec -> {
+        getFileSystemOperations().sync(spec -> {
             spec.from(sourceFiles);
             spec.into(getDestinationDir());
         });
