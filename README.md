@@ -18,7 +18,7 @@ Resolved the following files: []
 BUILD SUCCESSFUL in 978ms
 ```
 
-3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 113:
+3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 121:
 
 ```
 // view.withVariantReselection();
@@ -54,7 +54,7 @@ Resolved the following files: []
 BUILD SUCCESSFUL in 978ms
 ```
 
-3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 128:
+3) Next, open the file `buildSrc/src/main/java/org/gradle/resolution/plugin/DocsResolutionPlugin.java` and uncomment line 136:
 
 ```
 // view.withVariantReselection();
@@ -64,10 +64,10 @@ BUILD SUCCESSFUL in 978ms
 
 ```
 > Task :lib:resolveAndroidJavadoc
-Resolved the following files: [shaky-3.0.3-SNAPSHOT-release-javadoc.jar]
+Resolved the following files: [seismic-1.0.2-javadoc.jar, shaky-3.0.3-SNAPSHOT-release-javadoc.jar]
 
 > Task :lib:resolveAndroidSource
-Resolved the following files: [shaky-3.0.3-SNAPSHOT-release-sources.jar]
+Resolved the following files: [seismic-1.0.2-sources.jar, shaky-3.0.3-SNAPSHOT-release-sources.jar]
 
 BUILD SUCCESSFUL in 786ms
 ```
