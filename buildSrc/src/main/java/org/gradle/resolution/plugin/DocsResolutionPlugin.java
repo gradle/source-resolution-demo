@@ -104,6 +104,16 @@ Attributes
 
             task.dependsOn("resolveAndroidSource", "resolveAndroidJavadoc");
         });
+
+        project.getTasks().register("resolveWithARQ", ResolveARQ.class, task -> {
+            task.setGroup("documentation");
+            task.setDescription("Resolve source and javadoc artifacts for all runtime dependencies using ArtifactResolutionQuery");
+
+            task.getResolutionResult().convention(project.provider(() -> runtimeClasspath.getIncoming().getResolutionResult()));
+
+            // Always rerun this task
+            task.getOutputs().upToDateWhen(e -> false);
+        });
     }
 
     /**
